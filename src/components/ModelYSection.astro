@@ -1,25 +1,13 @@
-<section
-	class='bg-white h-screen w-screen text-center relative overflow-hidden'
->
-	<div class='z-30 relative flex flex-col h-full'>
-		<header>
-			<h2 class='text-black pt-40 text-[40px] font-medium'>Model Y</h2>
-			<p class='text-black text-sm underline'>
-				Conecertar una prueba de conducción
-			</p>
-		</header>
-		<footer class='flex-grow justify-end flex flex-col pb-24'>
-			<div>
-				<a
-					href='#'
-					class='text-white border-[3px] rounded font-medium px-12 text-sm py-2 hover:text-black hover:bg-white border-white transition-colors backdrop-blur-sm bg-white/5'
-					>Prueba de conducción</a
-				>
-			</div>
-		</footer>
-	</div>
+---
+import CarSection from "./CarSection.astro";
+---
 
-	<div class='absolute top-0 bottom-0 z-10 h-full w-full'>
-		<img src='/model-y.avif' class='object-cover object-center h-full w-full' />
-	</div>
-</section>
+<CarSection
+	title='Model Y'
+	price='From $39,390*'
+	priceSavings='After Federal Tax Credit & Est. Gas Savings'
+	color='black'
+	footerSavings='*Price before incentives and savings is $50,490, excluding taxes and fees. Subject to change.'
+>
+	<img src='/model-y.avif' class='object-cover object-center h-full w-full' />
+</CarSection>

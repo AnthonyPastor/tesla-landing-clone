@@ -1,0 +1,68 @@
+---
+const {
+	color,
+	title,
+	price,
+	priceSavings,
+	footerSavings,
+	footerColor = "black",
+} = Astro.props as {
+	color: string;
+	title: string;
+	price: string;
+	priceSavings: string;
+	footerSavings: string;
+	footerColor?: string;
+};
+
+const textColor = `text-${color}`;
+const footerTextColor = `text-${footerColor}`;
+---
+
+<section
+	class='landing-section bg-white h-screen w-screen text-center relative overflow-hidden'
+	data-header-color={color}
+>
+	<div class='z-30 relative flex flex-col h-full'>
+		<header class=`${textColor}`>
+			<h2
+				class='pt-20 text-[40px] font-medium animate-fade-up transition-all animate-delay-[600ms]'
+			>
+				{title}
+			</h2>
+			<div class='animate-fade-up animate-delay-[1200ms]'>
+				<h3 class='text-xl font-medium'>{price}</h3>
+				<p class='text-xs font-thin'>
+					{priceSavings}
+				</p>
+			</div>
+		</header>
+		<footer class='flex-grow justify-end flex flex-col pb-6'>
+			<div class='flex gap-x-6 justify-center pb-10'>
+				<a
+					href='#'
+					class=`text-black rounded font-medium px-24 text-sm py-2 hover:text-white hover:bg-black transition-colors bg-white animate-fade-right animate-delay-[1200ms]`
+					>Order Now</a
+				>
+				<a
+					href='#'
+					class=`text-white rounded font-medium px-24 text-sm py-2 hover:bg-black transition-colors bg-gray-600 animate-fade-left animate-delay-[1200ms]`
+					>Demo Drive</a
+				>
+			</div>
+
+			<div class=`animate-fade-down animate-delay-[1600ms]`>
+				<p class=`${footerTextColor} text-xs`>
+					{footerSavings}
+				</p>
+				<a href='#' class=`underline text-xs ${footerTextColor}`>
+					Learn about est. gas savings.</a
+				>
+			</div>
+		</footer>
+	</div>
+
+	<div class='absolute top-0 bottom-0 z-10 h-full w-full'>
+		<slot />
+	</div>
+</section>

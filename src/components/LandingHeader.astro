@@ -2,14 +2,17 @@
 import Logo from "./Logo.astro";
 ---
 
-<header class='flex py-2 px-10 items-center fixed top-0 w-full z-40 text-white'>
-	<div class='flex flex-grow basis-0'>
+<header
+	class='flex py-2 px-10 items-center fixed top-0 w-full z-40 text-current'
+	id='landing-header'
+>
+	<div class='flex flex-grow basis-0 [&>svg]:transition-colors'>
 		<Logo />
 	</div>
 
 	<nav>
 		<ul
-			class='flex text-sm [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2'
+			class='flex text-sm [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2 [&>li>a]:transition-colors'
 		>
 			<li><a href='#'>Vehículos</a></li>
 			<li><a href='#'>Energía</a></li>
@@ -20,7 +23,7 @@ import Logo from "./Logo.astro";
 	</nav>
 	<nav class='flex flex-grow basis-0'>
 		<ul
-			class='flex text-sm [&>li>a]:inline-block [&>li>a]:px-[6px] [&>li>a]:py-2 justify-end w-full'
+			class='flex text-sm [&>li>a]:inline-block [&>li>a]:px-[6px] [&>li>a]:py-2 justify-end w-full [&>li>a]:transition-colors'
 		>
 			<li>
 				<a href='#'>
@@ -69,4 +72,59 @@ import Logo from "./Logo.astro";
 			</li>
 		</ul>
 	</nav>
+
+	<div
+		id='menu-backdrop'
+		class='absolute bg-black/5 backdrop-blur-lg rounded left-[var(--left)] top-[var(--top)] w-[var(--width)] h-[var(--height)] transition-all ease-in-out opacity-0 -z-10 duration-300'
+	>
+	</div>
 </header>
+
+<script>
+	const $listItem = document.querySelectorAll("#landing-header li");
+
+	const $menuBackdrop = document.querySelector("#menu-backdrop") as HTMLElement;
+
+	$listItem.forEach((item) => {
+		item.addEventListener("mouseenter", () => {
+			const { left, top, width, height } = item.getBoundingClientRect();
+
+			$menuBackdrop.style.setProperty("--left", `${left}px`);
+			$menuBackdrop.style.setProperty("--top", `${top}px`);
+			$menuBackdrop.style.setProperty("--width", `${width}px`);
+			$menuBackdrop.style.setProperty("--height", `${height}px`);
+			$menuBackdrop.style.opacity = "1";
+			$menuBackdrop.style.visibility = "visible";
+		});
+
+		item.addEventListener("mouseleave", () => {
+			$menuBackdrop.style.opacity = "0";
+			$menuBackdrop.style.visibility = "none";
+		});
+	});
+</script>
+
+<script>
+	const $header = document.querySelector("#landing-header") as HTMLElement;
+	const observerOptions = {
+		root: null,
+		rootMargin: "0px", // en cuanto sea visible el elemento
+		threshold: 0.9, // porcentaje de visiblidad
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			const { isIntersecting } = entry;
+
+			if (isIntersecting) {
+				const color = entry.target.getAttribute("data-header-color");
+
+				if (color) $header.style.color = color;
+			}
+		});
+	}, observerOptions);
+
+	const $sections = document.querySelectorAll(".landing-section");
+
+	$sections.forEach((section) => observer.observe(section));
+</script>

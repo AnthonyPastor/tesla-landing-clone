@@ -1,20 +1,48 @@
 ---
 import LandingHeader from "../components/LandingHeader.astro";
 import Layout from "../layouts/Layout.astro";
-import HeroSection from "../components/HeroSection.astro";
+import ExperienceTeslaSection from "../components/ExperienceTeslaSection.astro";
 import ModelYSection from "../components/ModelYSection.astro";
+import ModelSSection from "../components/ModelSSection.astro";
+import ModelXSection from "../components/ModelXSection.astro";
+import Model3Section from "../components/Model3Section.astro";
+import SolarPanelsSection from "../components/SolarPanelsSection.astro";
+import SolarRoofSection from "../components/SolarRoofSection.astro";
+import PowerwallSection from "../components/PowerwallSection.astro";
+import AccessoriesSection from "../components/AccessoriesSection.astro";
 ---
 
-<Layout title='Tesla'>
+<Layout title='Tesla - Landing clone'>
 	<LandingHeader />
 	<main
 		class='relative w-full h-screen overflow-auto overflow-x-hidden snap-y snap-mandatory'
 	>
 		<div class='snap-center'>
-			<HeroSection />
+			<Model3Section />
 		</div>
 		<div class='snap-center'>
 			<ModelYSection />
+		</div>
+		<div class='snap-center'>
+			<ModelSSection />
+		</div>
+		<div class='snap-center'>
+			<ModelXSection />
+		</div>
+		<div class='snap-center'>
+			<ExperienceTeslaSection />
+		</div>
+		<div class='snap-center'>
+			<SolarPanelsSection />
+		</div>
+		<div class='snap-center'>
+			<SolarRoofSection />
+		</div>
+		<div class='snap-center'>
+			<PowerwallSection />
+		</div>
+		<div class='snap-center'>
+			<AccessoriesSection />
 		</div>
 	</main>
 </Layout>
